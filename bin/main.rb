@@ -22,7 +22,7 @@ color1 = gets.chomp
 colors.delete(color1)
 puts 'Enter Player-2 name:'
 player2 = gets.chomp
-color2 = colors.push
+color2 = colors[0]
 
 puts "#{player1}, please input your move, your color is #{color1}:"
 move1 = gets.chomp
