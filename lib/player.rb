@@ -9,6 +9,10 @@ class Player
 
   def win?(move)
     @res_arr.push(move)
-    @win_arr.include?(@res_arr)
+    @result = false
+    @win_arr.each do |arr|
+      @result = true if @res_arr.include?(arr[0]) && @res_arr.include?(arr[1]) && @res_arr.include?(arr[2])
+    end
+    @result
   end
 end
