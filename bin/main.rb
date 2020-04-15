@@ -1,58 +1,52 @@
 #!/usr/bin/env ruby
 
-board = [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+require_relative '../lib/board.rb'
+require_relative '../lib/player.rb'
 
-def display_grid(board)
-  board.each do |n|
-    n.each do |j|
-      print "#{j} "
-    end
-    print "\n"
-  end
+puts "Welcome to tic-tac-toe game!\n\n"
+board = Board.new
+puts 'Enter Player-1 name:'
+name1 = gets.chomp
+until /\S/.match(name1)
+  puts 'Enter Valid name'
+  name1 = gets.chomp
 end
-
-game_on = true
-colors = %w[X O]
-puts 'Welcome to tic-tac-toe game'
-display_grid(board)
-puts "\nEnter Player-1 name:"
-player1 = gets.chomp
 puts "\nPlease select X or O"
 color1 = gets.chomp
-puts "\n#{player1}, your color is #{color1}"
-colors.delete(color1)
-puts "\nEnter Player-2 name:"
-player2 = gets.chomp
-color2 = colors[0]
-puts "\n#{player2}, your color is #{color2}"
-
-winner1 = false
-winner2 = false
-positions = { '1' => [0, 0], '2' => [1, 0], '3' => [2, 0],
-              '4' => [0, 1], '5' => [1, 1], '6' => [2, 1],
-              '7' => [0, 2], '8' => [1, 2], '9' => [2, 2] }
-
-while game_on
-  9.times do
-    puts "\n#{player1}, please input your move (1-9):"
-    move = gets.chomp
-    if /[0-9]/.match(move).nil?
-      puts "\nThis is not a valid input, try again"
-    elsif board[positions[move][0]][positions[move][1]] == 'X' or board[positions[move][0]][positions[move][1]] == 'O'
-      puts "\nThis position is already taken, try again"
-    else
-      board[positions[move][0]][positions[move][1]] = color1
-    end
-    display_grid(board)
-  end
-  game_on = false
-  winner1 = true
+until %w[O X].include?(color1)
+  puts "\nEnter a valid symbol"
+  color1 = gets.chomp
 end
-
-if winner1
-  puts "Game Over, #{player1} won, congratulations!"
-elsif winner2
-  puts "Game Over, #{player2} won, congratulations!"
-else
-  puts "Game Over, it's a tie, too bad!"
+puts "\nEnter Player-2 name:"
+name2 = gets.chomp
+until /\S/.match(name2)
+  puts 'Enter Valid name'
+  name2 = gets.chomp
+end
+color2 = board.get_color(color1)
+player1 = Player.new(name1, color1)
+player2 = Player.new(name2, color2)
+puts "\nHello #{name1}, your symbol is #{color1}!"
+puts "\nHello #{name2}, your symbol is #{color2}!\n\n"
+count = 0
+print board.display_grid + "\n"
+game_on = true
+current_player = player1
+while game_on
+  puts "#{current_player.name} select a Position (#{current_player.color})"
+  player_pos = gets.chomp.to_i
+  until board.valid_move?(player_pos)
+    puts "\nEnter a valid move (#{current_player.color})\n\n"
+    print board.display_grid + "\n"
+    player_pos = gets.chomp.to_i
+  end
+  puts board.display_grid(player_pos, current_player.color)
+  if current_player.wins?(player_pos)
+    game_on = false
+    puts "\n#{current_player.name} won!"
+    break
+  end
+  count += 1
+  current_player = current_player == player1 ? player2 : player1
+  return puts "\nMatch Draw!!" if count == 9
 end
