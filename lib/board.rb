@@ -9,13 +9,11 @@ class Board
   end
 
   def valid_move?(move)
-    @position[move - 1] == 'X' || @position[move - 1] == 'O' ? false : true
+    @position[move - 1] == 'X' || @position[move - 1] == 'O' || move > 9 || move < 1 ? false : true
   end
 
   def display_grid(move = nil, color = nil)
-    unless move.nil?
-      @position[@position.index(move)] = color
-    end
+    @position[@position.index(move)] = color unless move.nil?
     "     #{position[0]} | #{position[1]} | #{position[2]}
     ---+---+---
      #{position[3]} | #{position[4]} | #{position[5]}

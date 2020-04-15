@@ -7,12 +7,16 @@ class Player
                 [1, 5, 9], [3, 5, 7]]
   end
 
-  def win?(move)
+  def wins?(move)
     @res_arr.push(move)
     @result = false
     @win_arr.each do |arr|
       @result = true if @res_arr.include?(arr[0]) && @res_arr.include?(arr[1]) && @res_arr.include?(arr[2])
     end
     @result
+  end
+
+  def valid_name?(name)
+    return true if /\S/.match(name)
   end
 end
