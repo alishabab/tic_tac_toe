@@ -3,14 +3,12 @@
 require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 
-player1 = Player.new
-player2 = Player.new
 puts "Welcome to tic-tac-toe game!\n\n"
 board = Board.new
 puts 'Enter Player-1 name:'
 name1 = gets.chomp
-until player1.valid_name?(name1)
-  puts 'Enter a valid name'
+until /\S/.match(name1)
+  puts 'Enter Valid name'
   name1 = gets.chomp
 end
 puts "\nPlease select X or O"
@@ -19,39 +17,36 @@ until %w[O X].include?(color1)
   puts "\nEnter a valid symbol"
   color1 = gets.chomp
 end
-color2 = board.get_color(color1)
 puts "\nEnter Player-2 name:"
 name2 = gets.chomp
-until player2.valid_name?(name2)
-  puts "\nEnter a valid name"
+until /\S/.match(name2)
+  puts 'Enter Valid name'
   name2 = gets.chomp
 end
+color2 = board.get_color(color1)
+player1 = Player.new(name1, color1)
+player2 = Player.new(name2, color2)
 puts "\nHello #{name1}, your symbol is #{color1}!"
 puts "\nHello #{name2}, your symbol is #{color2}!\n\n"
 count = 0
 print board.display_grid + "\n"
-loop do
-  puts "#{name1} select a Position (#{color1})"
-  player1_pos = gets.chomp.to_i
-  until board.valid_move?(player1_pos)
-    puts "\nEnter a valid move (#{color1})\n\n"
+game_on = true
+current_player = player1
+while game_on
+  puts "#{current_player.name} select a Position (#{current_player.color})"
+  player_pos = gets.chomp.to_i
+  until board.valid_move?(player_pos)
+    puts "\nEnter a valid move (#{current_player.color})\n\n"
     print board.display_grid + "\n"
-    player1_pos = gets.chomp.to_i
+    player_pos = gets.chomp.to_i
+  end
+  puts board.display_grid(player_pos, current_player.color)
+  if current_player.wins?(player_pos)
+    game_on = false
+    puts "\n#{current_player.name} won!"
+    break
   end
   count += 1
-  puts board.display_grid(player1_pos, color1)
-  return puts "\n#{name1} won!" if player1.wins?(player1_pos)
-  return puts "\nMatch Draw!!" if count == 9
-
-  puts "#{name2} select the position (#{color2})"
-  player2_pos = gets.chomp.to_i
-  until board.valid_move?(player2_pos)
-    puts "\nEnter a valid move (#{color2})\n\n"
-    print board.display_grid + "\n"
-    player2_pos = gets.chomp.to_i
-  end
-  count += 1
-  puts board.display_grid(player2_pos, color2)
-  return puts "\n#{name2} won!" if player2.wins?(player2_pos)
+  current_player = current_player == player1 ? player2 : player1
   return puts "\nMatch Draw!!" if count == 9
 end
