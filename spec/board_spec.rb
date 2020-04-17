@@ -21,4 +21,13 @@ describe Board do
       expect(board.valid_move?(10)).to be false
     end
   end
+
+  describe '#display_grid' do
+    it 'returns the grid of string if correct position is passed' do
+      expect(board.display_grid(3, 'X')).to be_instance_of(String)
+    end
+    it 'returns error if invalid argument is paased' do
+      expect { board.display_grid(10, 'X') }.to raise_error(TypeError)
+    end
+  end
 end
