@@ -1,4 +1,5 @@
 require '../lib/board.rb'
+require '../lib/player.rb'
 describe Board do
   board = Board.new
   describe '#get_color' do
@@ -20,6 +21,9 @@ describe Board do
     it 'returns false if a move is not valid' do
       expect(board.valid_move?(10)).to be false
     end
+    it 'returns error if no argument is given' do
+      expect { board.valid_move? }.to raise_error(ArgumentError)
+    end
   end
 
   describe '#display_grid' do
@@ -28,6 +32,24 @@ describe Board do
     end
     it 'returns error if invalid argument is paased' do
       expect { board.display_grid(10, 'X') }.to raise_error(TypeError)
+    end
+  end
+end
+
+describe Player do
+  describe '#wins?' do
+    player = Player.new('Murilo', 'X')
+    it 'It returns false if the player doesnt win the match' do
+      expect(player.wins?(1)).to be false
+    end
+    it 'It returns false if the player doesnt win the match' do
+      expect(player.wins?(2)).to be false
+    end
+    it 'It returns true if player wins the match' do
+      expect(player.wins?(3)).to be true
+    end
+    it 'returns error if no argument is passed' do
+      expect { player.wins? }.to raise_error(ArgumentError)
     end
   end
 end
