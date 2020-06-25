@@ -2,9 +2,15 @@
 
 [![hire-badge](https://img.shields.io/badge/Consult%20/%20Hire%20Shabab-Click%20to%20Contact-brightgreen)](mailto:shababsaifi@gmail.com) [![Twitter Follow](https://img.shields.io/twitter/follow/shabab_ali?label=Follow%20Shabab%20on%20Twitter&style=social)](https://twitter.com/shabab_ali)
 
-# TIC-TAC-TOE [Collaborative Project]
+# Tic Tac Toe console game [Collaborative Project]
 
-This project is tic tac toe game developed using ruby language. 
+In this project we have built a Tic Tac Toe console game. It is developed in Ruby programming language.
+
+>Both the players are asked to enter their names and choose symbols.
+![screenshot](screenshot_1.png)
+
+>A player can make his move by entering grid position.
+![screenshot](screenshot_2.png)
 
 ## Instructions and Game rules
 
@@ -35,25 +41,21 @@ Ruby
 Clone or fork the repository.
 Execute `main.rb` file
 
-## Author 1
+## Authors
 
-Murilo Roque Paiva da Silva
+👤 **Murilo Roque Paiva da Silva**
 
-Github: @MuriloRoque
+- Github: [@MuriloRoque](https://github.com/MuriloRoque)
+- Twitter: [@MuriloRoquePai1](https://twitter.com/MuriloRoquePai1)
+- LinkedIn: [MuriloRoque](https://www.linkedin.com/in/murilo-roque-b1268741/)
+- Email: [muriloengqui@gmail.com](mailto:muriloengqui@gmail.com)
 
-Twitter: @MuriloRoquePai1
+👤 **Shabab Ali**
 
-Linkedin: https://www.linkedin.com/in/murilo-roque-b1268741/
-
-## Author 2
-
-Shabab Ali
-
-Github: @alishabab
-
-Twitter: @shabab_ali
-
-Linkedin: https://www.linkedin.com/in/shababsaifi/
+- Github: [@alishabab](https://github.com/alishabab)
+- Twitter: [@shabab_ali](https://twitter.com/shabab_ali)
+- LinkedIn: [shababali](https://www.linkedin.com/in/shababali/)
+- Email: [shababsaifi@gmail.com](mailto:shababsaifi@gmail.com)
 
 ## 🤝 Contributing
 
